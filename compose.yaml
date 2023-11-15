@@ -14,14 +14,18 @@ services:
       context: ./app
     links:
       - todo-database
-    #volumes: 
-    #  - ./app:/usr/src/app
-    #  - /usr/src/app/node_modules
+    volumes: 
+      - ./app:/usr/src/app
+      - /usr/src/app/node_modules
     ports:
       - 3001:3001
 
   todo-database:
     image: mongo:6
     command: mongod --port 27018
+    volumes:
+          - database:/data/db/
     ports:
       - 27018:27018
+volumes:
+    database:
